@@ -13,9 +13,8 @@ class BankAccount
 
   # Class Methods Go Here.
 
-    def self.create(name = "Account #{@@accounts.length}") #<= I got this from a stackoverflow answer. >_>
-      @@accounts << BankAccount.new(name)
-      @@accounts[1]
+    def self.create
+      @@accounts << BankAccount.new
     end
 
     def self.total_funds
