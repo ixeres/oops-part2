@@ -12,12 +12,12 @@ class Zombies
 def initialize(speed = @@default_speed, strength = @@default_strength) #needed to make variables to accept the argument.
   @speed = speed
   @strength = strength
-  # if speed > @@max_speed
-  #   @@max_speed = speed
-  # end
-  # if strength > @@max_strength
-  #   @@max_strength = strength
-  # end
+  if @speed > @@max_speed
+    @@max_speed = @speed
+  end
+  if @strength > @@max_strength
+    @@max_strength = @strength
+  end
 end
 
 def encounter #tricky logic tree here, maybe use ifs to clarify?
