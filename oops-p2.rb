@@ -7,18 +7,27 @@ class BankAccount
 
   attr_accessor :balance
 
-  def initialize #Initial values. I guess it should technically go with the other instance variables, but... I like it here.
+  def initialize(name) #Initial values. I guess it should technically go with the other instance variables, but... I like it here.
     @balance = 0
+    @name = name #this lets the name operation in 'create' fill in an account name.
   end
 
   # Class Methods Go Here.
 
-    def self.create
-      @@accounts << BankAccount.new
+    def self.list_accounts
+      @@accounts
+    end
+
+    def self.create(name = "Account #{@@accounts.length}")
+      @@accounts << BankAccount.new(name)
+      @@accounts[-1] #this lets me run instance methods on the accounts. Otherwise I get errors because they are part of an array.
     end
 
     def self.total_funds
-      total = @@accounts.sum
+      total = 0
+      @@accounts.each do |account|
+        total += account.balance
+      end
       puts "$#{total}"
     end
 
