@@ -47,9 +47,10 @@ def self.all
 end
 
 def self.new_day
-  some_die_off
-  spawn
-  increase_plague_level
+  dead_zombies = Zombies.some_die_off
+  new_zombies = Zombies.spawn
+  Zombies.increase_plague_level #Remember to call the class! Print results to make sure it's working.
+  puts "Dead = #{dead_zombies}, New = #{new_zombies}, Plague Level = #{@@plague_level}."
 end
 
 def self.some_die_off
