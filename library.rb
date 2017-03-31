@@ -27,18 +27,15 @@ class Book
   #
   # end
 
-  def lent_out?(title)
-    if @@on_loan.include?('title') == true
-      lent_out == true
-    end
+  def lent_out?
+    @@on_loan.include?(self)
   end
 
   # Class Methods
 
   def self.create(title, author, isbn)
     @@on_shelf << Book.new(title, author, isbn)
-    @@on_shelf[-1]
-    puts "New book available!"
+    @@on_shelf[-1] #makes it accessible outside the array.
   end
 
   def self.current_due_date
