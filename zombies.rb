@@ -55,7 +55,7 @@ end
 def self.some_die_off
   dead = rand(11)
   dead.times do
-    @@horde.delete #should delete a zombie off the horde once for each number in 'dead'
+    @@horde.delete_at(@@horde.size) #used delete_at to fix the 'wrong number of arguments' error.
   end
 end
 
