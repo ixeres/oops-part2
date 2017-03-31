@@ -13,11 +13,11 @@ class Book
     @title = title
     @author = author
     @isbn = isbn
-    @due_date = nil
+    @due_date = nil #added to work with borrow/return methods.
   end
 
   def borrow
-    if @@on_loan
+    if (lent_out?)
       return false #remember where your returns are!
     else
       @@on_loan << self #Self targets the class object you are calling! WOW.
@@ -54,18 +54,21 @@ class Book
   end
 
   def self.overdue_books
-
+    overdue = [] #creates an empty array to store the list of overdue books.
+    @@on_loan.each do |book|
+      if (Time.now > book.current_due_date)
+        overdue_books << book #adds the book object to the new array.
+      end
+    end
+    overdue_books #displays the array of overdue books.
   end
 
   def self.browse
-    puts @@on_shelf.rand(100)
+    @@on_shelf.values_at(rand) #Maybe? Random is weird.
   end
 
   def self.available
-    @@on_shelf.each do |books|
-      books = Book(title)
-      put books
-    end
+    @@on_shelf #checks if book is part of on_shelf array. Much simpler than I originally tried to make it.
   end
 
   def self.borrowed
