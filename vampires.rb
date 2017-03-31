@@ -24,6 +24,7 @@ class Vampire
     @@vampires.each do |vamp| #checks through the entire class
       unless (vamp.in_coffin && vamp.drank_blood_today) #boolean check for both drinking blood AND being in coffin.
         @@vampires.delete(vamp)
+      end
     end
   end
 
