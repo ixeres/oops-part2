@@ -10,21 +10,21 @@ class Zombies
 @@default_strength = 3
 
 def initialize(speed = @@default_speed, strength = @@default_strength) #needed to make variables to accept the argument.
-  @@default_speed = speed
-  if speed > @@max_speed
-    @@max_speed = speed
-  end
-  @@default_strength = strength
-  if strength > @@max_strength
-    @@max_strength = strength
-  end
+  @speed = speed
+  @strength = strength
+  # if speed > @@max_speed
+  #   @@max_speed = speed
+  # end
+  # if strength > @@max_strength
+  #   @@max_strength = strength
+  # end
 end
 
 def encounter #tricky logic tree here, maybe use ifs to clarify?
   if outrun_zombie?
     puts "You escaped the zombie!"
   elsif survive_attack?
-    @@horde << Zombie.new
+    @@horde << Zombies.new
     puts "You were turned into a zombie!"
   else
       puts "Oh no! You were killed by the zombie!"
