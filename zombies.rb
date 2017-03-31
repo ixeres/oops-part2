@@ -9,7 +9,7 @@ class Zombies
 @@default_speed = 1
 @@default_strength = 3
 
-def initialize(speed, strength)
+def initialize(speed = @@default_speed, strength = @@default_strength) #needed to make variables to accept the argument.
   @@default_speed = speed
   if speed > @@max_speed
     @@max_speed = speed
@@ -20,17 +20,14 @@ def initialize(speed, strength)
   end
 end
 
-def encounter
-  outrun_zombie?
-  if true
-    puts "You escaped the zombie horde!"
+def encounter #tricky logic tree here, maybe use ifs to clarify?
+  if outrun_zombie?
+    puts "You escaped the zombie!"
+  elsif survive_attack?
+    @@horde << Zombie.new
+    puts "You were turned into a zombie!"
   else
-    survive_attack?
-    if true
-      puts "You survived the zombie onslaught!"
-    else
-      puts "Oh no! You were killed by the zombie horde!"
-    end
+      puts "Oh no! You were killed by the zombie!"
   end
 end
 
@@ -63,7 +60,7 @@ end
 def self.spawn
   zombie_count = rand(@@plague_level +1) #should fix the 'private method' problems?
   zombie_count.times do
-    @@horde << Zombies.new((@@max_speed +1), rand(@@max_strength + 1)) #takes number from above, creates inital values for zombies, adds them to the horde.
+    @@horde << Zombies.new(rand(@@max_speed +1), rand(@@max_strength + 1)) #takes number from above, creates inital values for zombies, adds them to the horde.
   end
 end
 
