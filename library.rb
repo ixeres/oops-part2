@@ -64,7 +64,7 @@ class Book
   end
 
   def self.browse
-    @@on_shelf.values_at(rand) #Maybe? Random is weird.
+    @@on_shelf.values_at(rand(4)) #Maybe? Random is weird.
   end
 
   def self.available
@@ -72,10 +72,7 @@ class Book
   end
 
   def self.borrowed
-    @@on_loan.each do |books|
-      books = Book(title)
-      put books
-    end
+    @@on_loan #JUST LIKE AVAILABLE. Wow so simple. Assuming it works.
   end
 
 end
