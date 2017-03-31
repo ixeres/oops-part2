@@ -13,22 +13,33 @@ class Book
     @title = title
     @author = author
     @isbn = isbn
+    @due_date = nil
   end
 
-  def borrow(title)
-    if lent_out == true
-      borrow == false
-    else current_due_date(due_date) << @@on_loan
-      borrow == true
+  def borrow
+    if @@on_loan
+      return false #remember where your returns are!
+    else
+      @@on_loan << self #Self targets the class object you are calling! WOW.
+      @@on_shelf.delete(self)
+      @due_date = Book.current_due_date #Calls the class method for Book to set the due date for the object.
+      return true
     end
   end
 
-  # def return_to_library
-  #
-  # end
+  def return_to_library
+    if (lent_out?) #don't need to enter == true argument, since lent_out? is a true/false check.
+      @@on_shelf << self
+      @@on_loan.delete(self)
+      @due_date = nil
+      return true
+    else
+      return false
+    end
+  end
 
   def lent_out?
-    @@on_loan.include?(self)
+    @@on_loan.include?(self) #include returns a true or false on its own.
   end
 
   # Class Methods
@@ -42,9 +53,9 @@ class Book
     Time.now + (2 * 7 * 24 * 3600) #2 weeks of 7 days of 24 hours of 3600 minutes.
   end
 
-  # def self.overdue_books
-  #
-  # end
+  def self.overdue_books
+
+  end
 
   def self.browse
     puts @@on_shelf.rand(100)
