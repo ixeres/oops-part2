@@ -15,32 +15,39 @@ class Book
     @isbn = isbn
   end
 
-  def borrow
-
+  def borrow(title)
+    if lent_out == true
+      borrow == false
+    else current_due_date(due_date) << @@on_loan
+      borrow == true
+    end
   end
 
-  def return_to_library
-
-  end
+  # def return_to_library
+  #
+  # end
 
   def lent_out?(title)
-    if %w[(title)]@@on_loan
+    if @@on_loan.include?('title') == true
+      lent_out == true
+    end
   end
 
   # Class Methods
 
-  def self.create
+  def self.create(title, author, isbn)
     @@on_shelf << Book.new(title, author, isbn)
-    puts "#{Book(title)} by #{Book(author)} and ISBN# #{Book(isbn)} is available!"
+    @@on_shelf[-1]
+    puts "New book available!"
   end
 
   def self.current_due_date
-
+    Time.now + (2 * 7 * 24 * 3600) #2 weeks of 7 days of 24 hours of 3600 minutes.
   end
 
-  def self.overdue_books
-
-  end
+  # def self.overdue_books
+  #
+  # end
 
   def self.browse
     puts @@on_shelf.rand(100)
