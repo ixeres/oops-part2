@@ -2,17 +2,17 @@
 
 class Vampire
 
-  def initialize(name, age)
+  def initialize(name)
     @name = name
-    @age = age
+    @age = 0
     @in_coffin = true
     @drank_blood_today = true
   end
 
     @@vampires = []
 
-  def self.create #adds to class, is a class variable.
-    @@vampires << Vampire.new(name, age)
+  def self.create(name) #adds to class, is a class variable.
+    @@vampires << Vampire.new(name)
     @@vampires[-1]
   end
 
@@ -21,9 +21,9 @@ class Vampire
   end
 
   def self.sunrise #affects the entire class
-    if self.@in_coffin
-      else
-      @@vampires.delete_at(self)
+    @@vampires.each do |vamp| #checks through the entire class
+      unless (vamp.in_coffin && vamp.drank_blood_today) #boolean check for both drinking blood AND being in coffin.
+        @@vampires.delete(vamp)
     end
   end
 
@@ -33,7 +33,7 @@ class Vampire
   end
 
   def go_home #for individual vampires
-    if self.@in_coffin
+    if @in_coffin
       puts "You're already in your coffin, idiot!"
     else
       @in_coffin = true
